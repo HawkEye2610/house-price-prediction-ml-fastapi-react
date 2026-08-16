@@ -29,7 +29,7 @@ The machine learning model is exposed through a **FastAPI REST API**, while a **
 * Comparison of multiple regression models
 * Random Forest hyperparameter tuning
 * Feature importance analysis
-* Saved trained model and evaluation metrics
+* Reproducible model training and evaluation
 * FastAPI prediction API
 * Pydantic input validation
 * Single-house prediction
@@ -227,14 +227,17 @@ R²  : 0.8046 → 0.8178
 
 The tuned model therefore improved performance on the test set.
 
-The final model and its metrics are stored in:
+The trained model files are generated locally by running:
 
-```text
+python ml/train.py
+
+This creates:
 models/
 ├── house_model.joblib
-├── house_features.joblib
-└── model_metrics.json
-```
+└── house_features.joblib
+
+Model evaluation metrics are tracked in:
+models/model_metrics.json
 
 ---
 
@@ -359,8 +362,6 @@ house_prediction_api/
 │   └── train.py
 │
 ├── models/
-│   ├── house_model.joblib
-│   ├── house_features.joblib
 │   └── model_metrics.json
 │
 ├── reports/
