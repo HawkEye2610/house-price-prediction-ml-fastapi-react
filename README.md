@@ -523,15 +523,21 @@ http://localhost:5173
 
 ## 📸 Screenshots
 
-Add project screenshots here after the repository is pushed:
+### React Frontend
 
-```text
-Frontend
-API Swagger UI
-Prediction Result
-Batch Prediction
-EDA Visualizations
-```
+![HousePredict React Frontend](screenshots/frontend.png)
+
+### FastAPI Swagger UI
+
+![FastAPI Swagger API](screenshots/api.png)
+
+### Batch Prediction
+
+![Batch CSV Prediction](screenshots/batch_predictions.png)
+
+### Exploratory Data Analysis
+
+![EDA Correlation Heatmap](screenshots/eda.png)
 
 ---
 
