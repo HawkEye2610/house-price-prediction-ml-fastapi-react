@@ -274,6 +274,8 @@ models/
 Model evaluation metrics are tracked in:
 models/model_metrics.json
 
+> For the deployed application, a lighter 100-tree Random Forest using the same tuned hyperparameters was selected to fit the memory constraints of the free hosting environment. Its test-set R² is 0.8145.
+
 ---
 
 ## 🔎 Feature Importance
