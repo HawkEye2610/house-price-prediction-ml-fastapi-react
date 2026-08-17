@@ -411,25 +411,13 @@ Expected result:
 
 Make sure Docker Desktop is running.
 
-Before starting Docker Compose, generate the required model files by running:
-
-```bash 
-python ml/train.py
-```
-
-This creates:
-
-```text 
-models/
-├── house_model.joblib
-└── house_features.joblib
-```
-
 Then, from the project root, start the complete application:
 
 ```bash 
 docker compose up --build
 ```
+
+During the backend image build, the machine learning training script is automatically executed to generate the required model files.
 
 This starts:
 
