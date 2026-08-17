@@ -1,5 +1,9 @@
 # 🏠 House Price Prediction
 
+🌐 **[Live Demo](https://house-price-prediction-navy-eta.vercel.app/)**  
+🔌 **[Live API](https://house-price-api-zlvp.onrender.com/)**  
+📚 **[API Docs](https://house-price-api-zlvp.onrender.com/docs)**
+
 An end-to-end machine learning application for predicting California house prices using **Scikit-learn, FastAPI, React, and Docker**.
 
 The project covers the complete workflow from exploratory data analysis and model selection to API development, a React frontend, automated testing, and containerized deployment.
@@ -20,6 +24,15 @@ This application predicts the estimated value of a California house based on eig
 * Longitude
 
 The machine learning model is exposed through a **FastAPI REST API**, while a **React frontend** provides an interactive interface for making individual and batch predictions.
+
+## 🌍 Live Deployment
+
+The application is deployed using:
+
+- **Vercel** — React frontend
+- **Render** — FastAPI backend
+
+The backend may take some time to respond after a period of inactivity because the Render Free instance can spin down when idle.
 
 ---
 
@@ -76,10 +89,15 @@ The machine learning model is exposed through a **FastAPI REST API**, while a **
 * Docker
 * Docker Compose
 * Nginx
+* Vercel — React frontend hosting
+* Render — FastAPI backend hosting
+* Git + GitHub — Version control and source hosting
 
 ---
 
 ## 🏗️ Architecture
+
+### Local Development
 
 ```text
                     ┌──────────────────────┐
@@ -103,6 +121,34 @@ The machine learning model is exposed through a **FastAPI REST API**, while a **
 ```
 
 For batch prediction, the React frontend uploads a CSV file to FastAPI, which returns a generated prediction CSV.
+
+### Production Deployment
+```text
+                         ┌──────────────────┐
+                         │      GitHub      │
+                         │  Source Code     │
+                         └────────┬─────────┘
+                                  │
+                    ┌─────────────┴─────────────┐
+                    │                           │
+                    ▼                           ▼
+          ┌──────────────────┐        ┌──────────────────┐
+          │      Vercel      │        │      Render      │
+          │ React Frontend   │        │ FastAPI Backend  │
+          └────────┬─────────┘        └────────┬─────────┘
+                   │                           │
+                   │       HTTP / JSON         │
+                   └──────────────────────────►│
+                                               ▼
+                                    ┌──────────────────┐
+                                    │  Deployment ML   │
+                                    │ Random Forest    │
+                                    └──────────────────┘
+```
+
+The production frontend is hosted on Vercel, while the FastAPI backend and deployment model are hosted on Render.
+
+Docker and Docker Compose are used for local containerized development and testing.
 
 ---
 
@@ -274,7 +320,7 @@ models/
 Model evaluation metrics are tracked in:
 models/model_metrics.json
 
-> For the deployed application, a lighter 100-tree Random Forest using the same tuned hyperparameters was selected to fit the memory constraints of the free hosting environment. Its test-set R² is 0.8145.
+> **Deployment note:** The 400-tree Random Forest is the main model evaluated during development and achieved an R² of 0.8178. For the free hosting environment, the deployed API uses a lighter 100-tree Random Forest with the same selected hyperparameters. Its test-set R² is 0.8145, providing a small performance trade-off for significantly lower resource usage.
 
 ---
 
@@ -329,7 +375,7 @@ http://localhost:8000/docs
 }
 ```
 
-### Example response
+### Example development response
 
 ```json
 {
@@ -396,7 +442,8 @@ house_prediction_api/
 │
 ├── ml/
 │   ├── explore.py
-│   └── train.py
+│   ├── train.py
+│   └── train_deployment.py
 │
 ├── models/
 │   └── model_metrics.json
@@ -404,6 +451,12 @@ house_prediction_api/
 ├── reports/
 │   ├── model_comparison.csv
 │   └── figures/
+│
+├── screenshots/
+│   ├── frontend.png
+│   ├── api.png
+│   ├── batch_predictions.png
+│   └── eda.png
 │
 ├── tests/
 │   └── test_api.py
@@ -574,9 +627,9 @@ Possible future improvements include:
 * Additional model experimentation
 * More advanced model interpretability
 * Improved prediction uncertainty estimation
-* Cloud deployment
 * More advanced geographic visualization
-* Automated CI workflows
+* Automated CI/CD workflows
+* Model monitoring and drift detection
 
 ---
 
@@ -590,6 +643,6 @@ Predictions are generated from a machine learning model trained on the Californi
 
 ## 👨‍💻 Project
 
-**House Price Prediction — ML + FastAPI + React + Docker**
+**House Price Prediction — ML + FastAPI + React + Docker + Vercel + Render**
 
 Built as an end-to-end machine learning application demonstrating model development, API integration, frontend development, testing, and containerization.
