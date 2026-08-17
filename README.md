@@ -193,17 +193,52 @@ The search included:
 * `min_samples_leaf`
 * `max_features`
 
-The best configuration selected:
+### Best Configuration
 
 ```text
-n_estimators = 400
-max_depth = None
+n_estimators      = 400
+max_depth         = None
 min_samples_split = 2
-min_samples_leaf = 1
-max_features = log2
+min_samples_leaf  = 1
+max_features      = log2
 ```
 
 The tuned model was then evaluated on the same untouched test set used for the baseline comparison.
+
+### 🚀 Deployment Training
+
+Hyperparameter tuning is performed during model development using:
+
+```text
+ml/train.py
+```
+
+For deployment, the selected hyperparameters are reused in:
+
+```text
+ml/train_deployment.py
+```
+
+This script trains the final Random Forest **without repeating the expensive hyperparameter search**, keeping Docker builds lightweight while preserving the tuned model configuration.
+
+### Training Workflow
+
+```text
+Model Development
+       ↓
+RandomizedSearchCV
+       ↓
+Best Hyperparameters
+       ↓
+Held-out Test Evaluation
+       ↓
+Deployment Training
+       ↓
+Final Docker Model
+```
+
+> **Note:** The reported evaluation metrics come from the held-out test-set evaluation performed during model development. The deployment script reuses the selected hyperparameters to reproduce the final model without running the search again.
+
 
 ---
 

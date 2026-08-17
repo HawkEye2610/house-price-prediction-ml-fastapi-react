@@ -10,8 +10,8 @@ COPY ml ./ml
 COPY app ./app
 COPY models ./models
 
-RUN python ml/train.py
+RUN python ml/train_deployment.py
 
 EXPOSE 8000
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-10000}"]
